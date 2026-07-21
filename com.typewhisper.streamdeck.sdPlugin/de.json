@@ -1,0 +1,25 @@
+{
+  "Name": "TypeWhisper",
+  "Description": "Steuere TypeWhisper-Diktat, Workflows, Recorder, Verlauf und Wörterbuch über Stream Deck.",
+  "com.typewhisper.streamdeck.toggle-dictation": {
+    "Name": "Diktat umschalten",
+    "Tooltip": "TypeWhisper-Diktat starten oder stoppen."
+  },
+  "com.typewhisper.streamdeck.workflow-dictation": {
+    "Name": "Workflow-Diktat",
+    "Tooltip": "Mit einem ausgewählten TypeWhisper-Workflow diktieren.",
+    "Encoder": { "TriggerDescription": { "Push": "Diktat starten / stoppen", "Rotate": "Workflow auswählen" } }
+  },
+  "com.typewhisper.streamdeck.recorder": {
+    "Name": "Recorder",
+    "Tooltip": "Mikrofon und/oder Systemaudio mit TypeWhisper aufnehmen."
+  },
+  "com.typewhisper.streamdeck.last-transcription": {
+    "Name": "Letzte Transkription",
+    "Tooltip": "Die letzte TypeWhisper-Transkription in die Zwischenablage kopieren."
+  },
+  "com.typewhisper.streamdeck.add-dictionary-term": {
+    "Name": "Wörterbuchbegriff hinzufügen",
+    "Tooltip": "Einen Begriff aus der Zwischenablage zum TypeWhisper-Wörterbuch hinzufügen."
+  }
+}

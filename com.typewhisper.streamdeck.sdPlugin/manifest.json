@@ -1,0 +1,164 @@
+{
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+  "Name": "TypeWhisper",
+  "Version": "0.1.0.0",
+  "Author": "TypeWhisper",
+  "Actions": [
+    {
+      "Name": "Toggle Dictation",
+      "UUID": "com.typewhisper.streamdeck.toggle-dictation",
+      "Icon": "imgs/actions/dictation/icon",
+      "Tooltip": "Start or stop TypeWhisper dictation.",
+      "Controllers": [
+        "Keypad"
+      ],
+      "DisableAutomaticStates": true,
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/actions/common/idle",
+          "TitleAlignment": "bottom",
+          "FontSize": 13
+        },
+        {
+          "Image": "imgs/actions/common/recording",
+          "TitleAlignment": "bottom",
+          "FontSize": 13
+        },
+        {
+          "Image": "imgs/actions/common/processing",
+          "TitleAlignment": "bottom",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Workflow Dictation",
+      "UUID": "com.typewhisper.streamdeck.workflow-dictation",
+      "Icon": "imgs/actions/workflow/icon",
+      "Tooltip": "Dictate with a selected TypeWhisper workflow.",
+      "Controllers": [
+        "Keypad",
+        "Encoder"
+      ],
+      "DisableAutomaticStates": true,
+      "UserTitleEnabled": false,
+      "Encoder": {
+        "Icon": "imgs/actions/workflow/icon",
+        "layout": "$A1",
+        "TriggerDescription": {
+          "Push": "Start / stop dictation",
+          "Rotate": "Select workflow"
+        }
+      },
+      "States": [
+        {
+          "Image": "imgs/actions/common/idle",
+          "TitleAlignment": "bottom",
+          "FontSize": 12
+        },
+        {
+          "Image": "imgs/actions/common/recording",
+          "TitleAlignment": "bottom",
+          "FontSize": 12
+        },
+        {
+          "Image": "imgs/actions/common/processing",
+          "TitleAlignment": "bottom",
+          "FontSize": 12
+        }
+      ]
+    },
+    {
+      "Name": "Recorder",
+      "UUID": "com.typewhisper.streamdeck.recorder",
+      "Icon": "imgs/actions/recorder/icon",
+      "Tooltip": "Record microphone and/or system audio with TypeWhisper.",
+      "Controllers": [
+        "Keypad"
+      ],
+      "DisableAutomaticStates": true,
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/actions/recorder/idle",
+          "TitleAlignment": "bottom",
+          "FontSize": 13
+        },
+        {
+          "Image": "imgs/actions/recorder/recording",
+          "TitleAlignment": "bottom",
+          "FontSize": 13
+        },
+        {
+          "Image": "imgs/actions/recorder/processing",
+          "TitleAlignment": "bottom",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Last Transcription",
+      "UUID": "com.typewhisper.streamdeck.last-transcription",
+      "Icon": "imgs/actions/clipboard/icon",
+      "Tooltip": "Copy the latest TypeWhisper transcription to the clipboard.",
+      "Controllers": [
+        "Keypad"
+      ],
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/actions/clipboard/key",
+          "Title": "Copy last",
+          "TitleAlignment": "bottom",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Add Dictionary Term",
+      "UUID": "com.typewhisper.streamdeck.add-dictionary-term",
+      "Icon": "imgs/actions/dictionary/icon",
+      "Tooltip": "Add one clipboard term to the TypeWhisper dictionary.",
+      "Controllers": [
+        "Keypad"
+      ],
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/actions/dictionary/key",
+          "Title": "Add clipboard\nterm",
+          "TitleAlignment": "bottom",
+          "FontSize": 13
+        }
+      ]
+    }
+  ],
+  "Category": "TypeWhisper",
+  "CategoryIcon": "imgs/plugin/category-icon",
+  "CodePath": "bin/plugin.js",
+  "Description": "Control TypeWhisper dictation, workflows, recorder, history, and dictionary from Stream Deck.",
+  "Icon": "imgs/plugin/marketplace",
+  "PropertyInspectorPath": "ui/settings.html",
+  "SDKVersion": 3,
+  "Software": {
+    "MinimumVersion": "7.1"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "12"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Nodejs": {
+    "Version": "24",
+    "Debug": "enabled"
+  },
+  "SupportURL": "https://github.com/TypeWhisper/typewhisper-stream-deck/issues",
+  "URL": "https://typewhisper.com",
+  "UUID": "com.typewhisper.streamdeck"
+}

@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head lang="en">
+  <meta charset="utf-8">
+  <title>TypeWhisper Settings</title>
+  <script src="sdpi-components.js"></script>
+  <style>
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="workflow-settings" hidden>
+    <sdpi-item label="Workflow">
+      <sdpi-select setting="workflowId" datasource="getWorkflows" loading="Loading workflows..." placeholder="Select a workflow" hot-reload show-refresh></sdpi-select>
+    </sdpi-item>
+  </div>
+
+  <div id="recorder-settings" hidden>
+    <sdpi-item label="Sources">
+      <sdpi-checkbox setting="microphone" default="true" label="Microphone"></sdpi-checkbox>
+      <sdpi-checkbox setting="systemAudio" default="false" label="System Audio"></sdpi-checkbox>
+    </sdpi-item>
+    <sdpi-item>
+      <p>At least one source must be enabled.</p>
+    </sdpi-item>
+  </div>
+
+  <div id="last-transcription-help" hidden>
+    <sdpi-item>
+      <p id="last-transcription-description">Press the key to copy the newest final TypeWhisper transcription to the clipboard.</p>
+    </sdpi-item>
+  </div>
+
+  <div id="dictionary-help" hidden>
+    <sdpi-item>
+      <p id="dictionary-description">Copy one word or single-line phrase, then press the key to add it to the TypeWhisper dictionary. Existing terms are preserved.</p>
+    </sdpi-item>
+  </div>
+
+  <sdpi-item label="TypeWhisper">
+    <sdpi-select global setting="instance" default="auto">
+      <option value="auto">Auto (Stable first)</option>
+      <option value="stable">Stable</option>
+      <option value="development">Development</option>
+    </sdpi-select>
+  </sdpi-item>
+  <sdpi-item label="Port override">
+    <sdpi-textfield global setting="portOverride" pattern="^[0-9]{1,5}$" placeholder="Automatic"></sdpi-textfield>
+  </sdpi-item>
+  <sdpi-item>
+    <p>Connection settings are shared by every TypeWhisper action. The API token is discovered automatically and is never shown or logged.</p>
+  </sdpi-item>
+
+  <script>
+    (() => {
+      const connect = window.connectElgatoStreamDeckSocket;
+      window.connectElgatoStreamDeckSocket = function (...args) {
+        connect?.(...args);
+        try {
+          const action = JSON.parse(args[4]).action;
+          document.getElementById("workflow-settings").hidden =
+            action !== "com.typewhisper.streamdeck.workflow-dictation";
+          document.getElementById("recorder-settings").hidden =
+            action !== "com.typewhisper.streamdeck.recorder";
+          document.getElementById("last-transcription-help").hidden =
+            action !== "com.typewhisper.streamdeck.last-transcription";
+          document.getElementById("dictionary-help").hidden =
+            action !== "com.typewhisper.streamdeck.add-dictionary-term";
+
+          if (navigator.language.toLowerCase().startsWith("de")) {
+            document.getElementById("last-transcription-description").textContent =
+              "Beim Drücken wird die neueste fertige TypeWhisper-Transkription in die Zwischenablage kopiert.";
+            document.getElementById("dictionary-description").textContent =
+              "Ein Wort oder einen einzeiligen Begriff kopieren und dann die Taste drücken. Der Begriff wird zum TypeWhisper-Wörterbuch hinzugefügt; vorhandene Einträge bleiben erhalten.";
+          }
+        } catch {
+          // Keep action-specific controls hidden if Stream Deck sends incomplete context.
+        }
+      };
+    })();
+  </script>
+</body>
+</html>

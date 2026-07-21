@@ -141,3 +141,10 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Stream Deck build and runtime output
+*.sdPlugin/bin/
+*.sdPlugin/logs/
+*.sdPlugin/fallbacks/
+*.streamDeckPlugin
+coverage/

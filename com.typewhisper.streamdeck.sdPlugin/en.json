@@ -1,0 +1,25 @@
+{
+  "Name": "TypeWhisper",
+  "Description": "Control TypeWhisper dictation, workflows, recorder, history, and dictionary from Stream Deck.",
+  "com.typewhisper.streamdeck.toggle-dictation": {
+    "Name": "Toggle Dictation",
+    "Tooltip": "Start or stop TypeWhisper dictation."
+  },
+  "com.typewhisper.streamdeck.workflow-dictation": {
+    "Name": "Workflow Dictation",
+    "Tooltip": "Dictate with a selected TypeWhisper workflow.",
+    "Encoder": { "TriggerDescription": { "Push": "Start / stop dictation", "Rotate": "Select workflow" } }
+  },
+  "com.typewhisper.streamdeck.recorder": {
+    "Name": "Recorder",
+    "Tooltip": "Record microphone and/or system audio with TypeWhisper."
+  },
+  "com.typewhisper.streamdeck.last-transcription": {
+    "Name": "Last Transcription",
+    "Tooltip": "Copy the latest TypeWhisper transcription to the clipboard."
+  },
+  "com.typewhisper.streamdeck.add-dictionary-term": {
+    "Name": "Add Dictionary Term",
+    "Tooltip": "Add one clipboard term to the TypeWhisper dictionary."
+  }
+}
