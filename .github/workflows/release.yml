@@ -24,6 +24,9 @@ jobs:
       - run: npm run validate
       - name: Package plugin
         run: npm exec -- streamdeck pack com.typewhisper.streamdeck.sdPlugin --output dist --force
+      - uses: ./.github/actions/validate-package
+        with:
+          package-path: dist/com.typewhisper.streamdeck.streamDeckPlugin
       - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
