@@ -1,0 +1,62 @@
+name: Validate Stream Deck package
+description: Verify the installable package archive and its required runtime files.
+
+inputs:
+  package-path:
+    description: Path to the .streamDeckPlugin archive.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Check package contents
+      shell: bash
+      env:
+        PACKAGE_PATH: ${{ inputs.package-path }}
+      run: |
+        set -euo pipefail
+
+        if [[ ! -f "$PACKAGE_PATH" ]]; then
+          echo "Package not found: $PACKAGE_PATH" >&2
+          exit 1
+        fi
+
+        unzip -tq "$PACKAGE_PATH"
+
+        plugin_root="com.typewhisper.streamdeck.sdPlugin"
+        entries="$(unzip -Z1 "$PACKAGE_PATH")"
+        required_files=(
+          "$plugin_root/manifest.json"
+          "$plugin_root/en.json"
+          "$plugin_root/de.json"
+          "$plugin_root/bin/package.json"
+          "$plugin_root/bin/plugin.js"
+          "$plugin_root/ui/settings.html"
+          "$plugin_root/ui/sdpi-components.js"
+          "$plugin_root/imgs/plugin/category-icon.svg"
+          "$plugin_root/imgs/plugin/marketplace.png"
+          "$plugin_root/imgs/plugin/marketplace@2x.png"
+          "$plugin_root/fallbacks/windows/clipboard_i686.exe"
+          "$plugin_root/fallbacks/windows/clipboard_x86_64.exe"
+        )
+
+        for required_file in "${required_files[@]}"; do
+          if ! grep -Fxq "$required_file" <<<"$entries"; then
+            echo "Required package file missing: $required_file" >&2
+            exit 1
+          fi
+        done
+
+        unzip -p "$PACKAGE_PATH" "$plugin_root/manifest.json" | node -e '
+          let input = "";
+          process.stdin.setEncoding("utf8");
+          process.stdin.on("data", chunk => input += chunk);
+          process.stdin.on("end", () => {
+            const manifest = JSON.parse(input);
+            if (manifest.UUID !== "com.typewhisper.streamdeck") throw new Error("Unexpected plugin UUID");
+            if (manifest.CodePath !== "bin/plugin.js") throw new Error("Unexpected plugin CodePath");
+            if (manifest.PropertyInspectorPath !== "ui/settings.html") throw new Error("Unexpected PropertyInspectorPath");
+          });
+        '
+
+        echo "Validated $PACKAGE_PATH (${#required_files[@]} required files)."
