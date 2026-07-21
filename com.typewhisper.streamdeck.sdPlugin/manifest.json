@@ -127,7 +127,7 @@
       "States": [
         {
           "Image": "imgs/actions/dictionary/key",
-          "Title": "Add term",
+          "Title": "Add clipboard\nterm",
           "TitleAlignment": "bottom",
           "FontSize": 13
         }

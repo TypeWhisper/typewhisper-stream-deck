@@ -25,6 +25,18 @@
     </sdpi-item>
   </div>
 
+  <div id="last-transcription-help" hidden>
+    <sdpi-item>
+      <p id="last-transcription-description">Press the key to copy the newest final TypeWhisper transcription to the clipboard.</p>
+    </sdpi-item>
+  </div>
+
+  <div id="dictionary-help" hidden>
+    <sdpi-item>
+      <p id="dictionary-description">Copy one word or single-line phrase, then press the key to add it to the TypeWhisper dictionary. Existing terms are preserved.</p>
+    </sdpi-item>
+  </div>
+
   <sdpi-item label="TypeWhisper">
     <sdpi-select global setting="instance" default="auto">
       <option value="auto">Auto (Stable first)</option>
@@ -50,6 +62,17 @@
             action !== "com.typewhisper.streamdeck.workflow-dictation";
           document.getElementById("recorder-settings").hidden =
             action !== "com.typewhisper.streamdeck.recorder";
+          document.getElementById("last-transcription-help").hidden =
+            action !== "com.typewhisper.streamdeck.last-transcription";
+          document.getElementById("dictionary-help").hidden =
+            action !== "com.typewhisper.streamdeck.add-dictionary-term";
+
+          if (navigator.language.toLowerCase().startsWith("de")) {
+            document.getElementById("last-transcription-description").textContent =
+              "Beim Drücken wird die neueste fertige TypeWhisper-Transkription in die Zwischenablage kopiert.";
+            document.getElementById("dictionary-description").textContent =
+              "Ein Wort oder einen einzeiligen Begriff kopieren und dann die Taste drücken. Der Begriff wird zum TypeWhisper-Wörterbuch hinzugefügt; vorhandene Einträge bleiben erhalten.";
+          }
         } catch {
           // Keep action-specific controls hidden if Stream Deck sends incomplete context.
         }

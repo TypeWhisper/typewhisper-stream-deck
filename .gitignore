@@ -145,5 +145,6 @@ vite.config.ts.timestamp-*
 # Stream Deck build and runtime output
 *.sdPlugin/bin/
 *.sdPlugin/logs/
+*.sdPlugin/fallbacks/
 *.streamDeckPlugin
 coverage/
