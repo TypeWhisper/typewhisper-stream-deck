@@ -41,7 +41,11 @@ export interface WorkflowRule {
   name?: string;
   title?: string;
   display_name?: string;
-  enabled: boolean;
+  /** Current TypeWhisper API field. */
+  is_enabled?: boolean;
+  /** Legacy alias accepted for compatibility with early API drafts. */
+  enabled?: boolean;
+  priority?: number;
   sort_order?: number;
 }
 

@@ -14,7 +14,7 @@ export class StatusCoordinator {
   private settings: GlobalSettings = {};
   private client?: TypeWhisperApiClient;
   private timer?: NodeJS.Timeout;
-  private polling = false;
+  private polling?: Promise<void>;
   private lastRulesRefresh = 0;
   private snapshot: StatusSnapshot = { connected: false, workflows: [] };
 
@@ -75,9 +75,26 @@ export class StatusCoordinator {
 
   private async poll(forceRules = false): Promise<void> {
     if (this.polling) {
+      const previousRulesRefresh = this.lastRulesRefresh;
+      await this.polling;
+      if (forceRules && this.lastRulesRefresh === previousRulesRefresh) {
+        await this.poll(true);
+      }
       return;
     }
-    this.polling = true;
+
+    const operation = this.performPoll(forceRules);
+    this.polling = operation;
+    try {
+      await operation;
+    } finally {
+      if (this.polling === operation) {
+        this.polling = undefined;
+      }
+    }
+  }
+
+  private async performPoll(forceRules: boolean): Promise<void> {
     try {
       const client = await this.getClient();
       const [app, dictation, recorderResult] = await Promise.all([
@@ -94,7 +111,7 @@ export class StatusCoordinator {
       if (forceRules || now - this.lastRulesRefresh >= RULE_REFRESH_MS) {
         workflows = (await client.getWorkflows()).rules
           .slice()
-          .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+          .sort((a, b) => (a.priority ?? a.sort_order ?? 0) - (b.priority ?? b.sort_order ?? 0));
         this.lastRulesRefresh = now;
       }
       this.snapshot = { connected: true, app, dictation, recorder, workflows };
@@ -105,8 +122,6 @@ export class StatusCoordinator {
         workflows: this.snapshot.workflows,
         error: error instanceof Error ? error.message : "TypeWhisper is unavailable"
       };
-    } finally {
-      this.polling = false;
     }
     await Promise.allSettled([...this.listeners.values()].map((listener) => listener(this.snapshot)));
   }

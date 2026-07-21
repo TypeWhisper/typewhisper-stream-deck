@@ -11,9 +11,9 @@ import {
 import type { StatusSnapshot, WorkflowRule } from "../src/types";
 
 const workflows: WorkflowRule[] = [
-  { id: "one", name: "One", enabled: true },
-  { id: "disabled", name: "Disabled", enabled: false },
-  { id: "two", name: "Two", enabled: true }
+  { id: "one", name: "One", is_enabled: true },
+  { id: "disabled", name: "Disabled", is_enabled: false },
+  { id: "two", name: "Two", is_enabled: true }
 ];
 
 describe("action rules", () => {
@@ -33,6 +33,11 @@ describe("action rules", () => {
     const enabled = enabledWorkflows({ connected: true, workflows });
     expect(nextWorkflow(enabled, "one", 1)?.id).toBe("two");
     expect(nextWorkflow(enabled, "one", -1)?.id).toBe("two");
+  });
+
+  it("accepts the legacy enabled field from early API drafts", () => {
+    expect(enabledWorkflows({ connected: true, workflows: [{ id: "legacy", enabled: true }] }))
+      .toEqual([{ id: "legacy", enabled: true }]);
   });
 
   it("never starts workflow dictation against an old app", () => {

@@ -17,7 +17,7 @@ export function supportsWorkflowDictation(snapshot: StatusSnapshot): boolean {
 }
 
 export function enabledWorkflows(snapshot: StatusSnapshot): WorkflowRule[] {
-  return snapshot.workflows.filter((workflow) => workflow.enabled);
+  return snapshot.workflows.filter((workflow) => workflow.is_enabled ?? workflow.enabled ?? false);
 }
 
 export function nextWorkflow(
