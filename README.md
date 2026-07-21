@@ -24,7 +24,7 @@ The plugin uses the Node.js 24 runtime bundled with Stream Deck 7.1+. No separat
 
 Download the latest `.streamDeckPlugin` file from [Releases](https://github.com/TypeWhisper/typewhisper-stream-deck/releases), open it, and confirm installation in Stream Deck.
 
-TypeWhisper Stable is preferred by default. In an action's Property Inspector, the global connection selection can be changed to Stable or Development, and a port can optionally be overridden. Authentication tokens are always read from TypeWhisper's local `api-discovery.json`; they are never displayed or logged.
+TypeWhisper Stable is preferred by default. Every action uses the same shared Property Inspector connection settings, where the instance can be changed to Stable or Development and a port can optionally be overridden. The selection is stored once for the entire plugin. Authentication tokens are always read from TypeWhisper's local `api-discovery.json`; they are never displayed or logged.
 
 ## Development
 

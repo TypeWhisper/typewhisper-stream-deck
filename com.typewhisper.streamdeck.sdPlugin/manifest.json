@@ -9,7 +9,6 @@
       "UUID": "com.typewhisper.streamdeck.toggle-dictation",
       "Icon": "imgs/actions/dictation/icon",
       "Tooltip": "Start or stop TypeWhisper dictation.",
-      "PropertyInspectorPath": "ui/connection.html",
       "Controllers": [
         "Keypad"
       ],
@@ -38,7 +37,6 @@
       "UUID": "com.typewhisper.streamdeck.workflow-dictation",
       "Icon": "imgs/actions/workflow/icon",
       "Tooltip": "Dictate with a selected TypeWhisper workflow.",
-      "PropertyInspectorPath": "ui/workflow.html",
       "Controllers": [
         "Keypad",
         "Encoder"
@@ -76,7 +74,6 @@
       "UUID": "com.typewhisper.streamdeck.recorder",
       "Icon": "imgs/actions/recorder/icon",
       "Tooltip": "Record microphone and/or system audio with TypeWhisper.",
-      "PropertyInspectorPath": "ui/recorder.html",
       "Controllers": [
         "Keypad"
       ],
@@ -105,7 +102,6 @@
       "UUID": "com.typewhisper.streamdeck.last-transcription",
       "Icon": "imgs/actions/clipboard/icon",
       "Tooltip": "Copy the latest TypeWhisper transcription to the clipboard.",
-      "PropertyInspectorPath": "ui/connection.html",
       "Controllers": [
         "Keypad"
       ],
@@ -124,7 +120,6 @@
       "UUID": "com.typewhisper.streamdeck.add-dictionary-term",
       "Icon": "imgs/actions/dictionary/icon",
       "Tooltip": "Add one clipboard term to the TypeWhisper dictionary.",
-      "PropertyInspectorPath": "ui/connection.html",
       "Controllers": [
         "Keypad"
       ],
@@ -144,6 +139,7 @@
   "CodePath": "bin/plugin.js",
   "Description": "Control TypeWhisper dictation, workflows, recorder, history, and dictionary from Stream Deck.",
   "Icon": "imgs/plugin/marketplace",
+  "PropertyInspectorPath": "ui/settings.html",
   "SDKVersion": 3,
   "Software": {
     "MinimumVersion": "7.1"
