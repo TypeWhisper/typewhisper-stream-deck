@@ -45,6 +45,8 @@ npm run typecheck
 npm run pack:dry-run
 ```
 
+The CI workflow also supports manual runs from GitHub's Actions tab. Every successful run uploads the packaged `.streamDeckPlugin` file as a downloadable artifact for 14 days. Version tags matching `v*` continue to publish the package as a GitHub Release.
+
 The Property Inspector bundles SDPI Components v4 locally, so it remains usable without internet access.
 
 ## Privacy

@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -45,3 +46,10 @@ jobs:
       - uses: ./.github/actions/validate-package
         with:
           package-path: dist/com.typewhisper.streamdeck.streamDeckPlugin
+      - name: Upload packaged plugin
+        uses: actions/upload-artifact@v4
+        with:
+          name: typewhisper-stream-deck-${{ github.sha }}
+          path: dist/com.typewhisper.streamdeck.streamDeckPlugin
+          if-no-files-found: error
+          retention-days: 14
