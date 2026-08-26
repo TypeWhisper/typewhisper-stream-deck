@@ -1,6 +1,6 @@
 {
     "name": "@typewhisper/stream-deck",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Stream Deck integration for TypeWhisper dictation, workflows, recorder, history, and dictionary controls.",
     "private": true,
     "license": "GPL-3.0-or-later",
