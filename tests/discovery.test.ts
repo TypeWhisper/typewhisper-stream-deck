@@ -18,9 +18,13 @@ describe("TypeWhisper discovery", () => {
     expect(candidates.map((candidate) => candidate.source)).toEqual([
       "stable",
       "stable",
+      "stable",
       "development",
       "development"
     ]);
+    expect(candidates[2]?.path).toBe(
+      "C:\\Data\\Packages\\TypeWhisper.TypeWhisper_51tqb5623pxja\\LocalCache\\Local\\TypeWhisper-UserData\\api-discovery.json"
+    );
   });
 
   it("finds both macOS application support locations", () => {

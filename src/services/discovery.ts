@@ -19,6 +19,18 @@ export function discoveryCandidates(
     return [
       { source: "stable", path: path.win32.join(localAppData, "TypeWhisper-UserData", "api-discovery.json") },
       { source: "stable", path: path.win32.join(localAppData, "TypeWhisper", "api-discovery.json") },
+      {
+        source: "stable",
+        path: path.win32.join(
+          localAppData,
+          "Packages",
+          "TypeWhisper.TypeWhisper_51tqb5623pxja",
+          "LocalCache",
+          "Local",
+          "TypeWhisper-UserData",
+          "api-discovery.json"
+        )
+      },
       { source: "development", path: path.win32.join(localAppData, "TypeWhisper-DevUserData", "api-discovery.json") },
       { source: "development", path: path.win32.join(localAppData, "TypeWhisper-Dev", "api-discovery.json") }
     ];
